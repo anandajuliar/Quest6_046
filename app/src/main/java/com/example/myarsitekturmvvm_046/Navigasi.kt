@@ -3,14 +3,18 @@ package com.example.myarsitekturmvvm_046
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myarsitekturmvvm_046.model.DataJK.JenisJK
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myarsitekturmvvm_046.view.FormIsian
 import com.example.myarsitekturmvvm_046.view.TampilData
+import com.example.myarsitekturmvvm_046.viewmodel.SiswaViewModel
 
 enum class Navigasi {
     Formulirku,
@@ -19,7 +23,7 @@ enum class Navigasi {
 
 @Composable
 fun DataApp(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     viewModel: SiswaViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ){
@@ -33,8 +37,8 @@ fun DataApp(
             composable(route = Navigasi.Formulirku.name) {
                 val konteks = LocalContext.current
                 FormIsian(
-                    pilihanJK = JenisK.map { id -> konteks.resources.gitString(id)},
-                    OnSubmitBtnClick = {
+                    pilihanJK = JenisJK.map {id -> konteks.resources.getString(id)},
+                    onSubmitButtonClicked = {
                         viewModel.setSiswa(it)
                         navController.navigate(route = Navigasi.Detail.name)
                     }
@@ -43,7 +47,7 @@ fun DataApp(
             composable(route = Navigasi.Detail.name) {
                 TampilData(
                     statusUiSiswa = uiState.value,
-                    onBackBtnClick =  {
+                    OnBackBtnClick =  {
                         cancelAndBackToFormulir(navController)
                     },
                 )
