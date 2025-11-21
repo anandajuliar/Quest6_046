@@ -32,8 +32,7 @@ import com.example.myarsitekturmvvm_046.model.Siswa
 @Composable
 fun TampilData(
     statusUiSiswa: Siswa,
-    OnBackBtnClick: () -> Unit,
-    item: Any
+    OnBackBtnClick: () -> Unit
 ) {
     val items = listOf(
         Pair(first= stringResource(id= R.string.nama_lengkap), second = statusUiSiswa.nama),
