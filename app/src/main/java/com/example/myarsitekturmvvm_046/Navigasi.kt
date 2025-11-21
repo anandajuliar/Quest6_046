@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,8 +31,11 @@ fun DataApp(
 
             modifier = Modifier.padding(paddingValues = isiRuang)) {
             composable(route = Navigasi.Formulirku.name) {
+                val konteks = LocalContext.current
                 FormIsian(
+                    pilihanJK = JenisK.map { id -> konteks.resources.gitString(id)},
                     OnSubmitBtnClick = {
+                        viewModel.setSiswa(it)
                         navController.navigate(route = Navigasi.Detail.name)
                     }
                 )
