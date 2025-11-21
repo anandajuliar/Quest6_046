@@ -36,9 +36,9 @@ fun TampilData(
     item: Any
 ) {
     val items = listOf(
-        Pair(first= stringResource(id= R.string.nama_lengkap), second = "Contoh Nama"),
-        Pair(first= stringResource(id= R.string.jenis_kelamin), second = "Lainnya"),
-        Pair(first= stringResource(id= R.string.alamat), second = "Yogyakarta"),
+        Pair(first= stringResource(id= R.string.nama_lengkap), second = statusUiSiswa.nama),
+        Pair(first= stringResource(id= R.string.jenis_kelamin), second = statusUiSiswa.gender),
+        Pair(first= stringResource(id= R.string.alamat), second = statusUiSiswa.alamat),
     )
     Scaffold(modifier = Modifier,
         topBar = {
