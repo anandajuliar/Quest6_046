@@ -21,8 +21,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -58,7 +60,7 @@ fun FormIsian(
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             OutlinedTextField(
-                value = "txtNama,
+                value = txtNama,
                 singleLine = true,
                 modifier = Modifier
                     .padding(top = 20.dp)
@@ -76,19 +78,14 @@ fun FormIsian(
                 color = Color.Red
             )
             Row {
-                jenisK.forEach { item ->
-                    Row(
+                pilihanJK.forEach { item ->
+                    Row(verticalAlignment = Alignment.CenterVertically){
+                        RadioButton(
                         selected = txtGender == item,
                         onClick = {
                             txtGender = item
                         }
-                    ),
-                        verticalAlignment = Alignment.CenterVertically){
-                        RadioButton(selected = txtGender == item,
-                            onClick = {
-                                txtGender= item
-                            }
-                        )
+                    )
                         Text(text = item)
                     }
                 }
@@ -113,7 +110,7 @@ fun FormIsian(
             Button(
                 modifier = Modifier.fillMaxWidth(fraction = 1f)
                     .padding(all=25.dp),
-                onClick = {OnSubmitButtonClicked(listData)}
+                onClick = {onSubmitButtonClicked(listData)}
             ){
                 Text(text = stringResource(id = R.string.submit))
             }
